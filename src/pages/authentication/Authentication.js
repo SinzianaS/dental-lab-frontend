@@ -24,7 +24,7 @@ export default function Authenticate() {
   };
 
   return (
-    <div>
+    <div style={{ width: 400, margin: "0 auto" }}>
       <Form form={form} onFinish={isLogin ? handleLogin : handleRegister}>
         <Form.Item label="Username" name="username" rules={[{ required: true }]}>
           <Input />
