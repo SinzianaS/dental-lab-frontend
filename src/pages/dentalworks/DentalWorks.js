@@ -96,7 +96,9 @@ export default function DentalWorks() {
             pagination={{ pageSize: 20 }}
             scroll={{ y: 240 }}
           />
-          <Button onClick={onAddDentalWork}>Add new Dental Work</Button>
+          <div style={{display:"flex", justifyContent: 'center' }}>
+            <Button style ={{width: "150px"}} onClick={onAddDentalWork}>Add Dental Work</Button>
+          </div>
         </div>
       )}
     </div>
