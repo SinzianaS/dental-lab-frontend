@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import DentalWorks from "./pages/dentalworks/DentalWorks";
 
 function App() {
   const navigate = useNavigate();
@@ -76,11 +77,11 @@ function SideMenu() {
           { label: "Patients", key: "/patients", icon: <SmileOutlined />},
           {label: "Dental works", key: "/dentalworks", icon: <CrownOutlined />,
           children:[
-            {label: "Show all", key: "/alldentalworks"},
-            {label: "Find by id", key: "/getdentalworkbyid"},
-            {label: "Find by color", key: "/getdentalworkbycolor"},
-            {label: "Find by status", key: "/getdentalworkbystatus"},
-            {label: "Find by type", key: "/getdentalworkbytype"}
+            {label: "Show all", key: "/dentalworks/alldentalworks"},
+            {label: "Find by id", key: "/dentalworks/getdentalworkbyid"},
+            {label: "Find by color", key: "/dentalworks/getdentalworkbycolor"},
+            {label: "Find by status", key: "/dentalworks/getdentalworkbystatus"},
+            {label: "Find by type", key: "/dentalworks/getdentalworkbytype"}
             ]},
           { label: "Login", key: "/authentication", icon: <UserOutlined /> },
         ]}
@@ -100,7 +101,7 @@ function Content() {
         <Route path="/dentaltechnicians" element={<div>Dental technicians</div>}></Route>
         <Route path="/patients" element={<div>Patients</div>}></Route>
 
-        <Route path="/alldentalworks" element={<div>All Dental works</div>}></Route>
+        <Route path="/dentalworks/alldentalworks" element={<DentalWorks />} />
         <Route path="/getdentalworkbyid" element={<div>Dental work by id</div>}></Route>
         <Route path="/getdentalworkbycolor" element={<div>Dental work by color</div>}></Route>
         <Route path="/getdentalworkbystatus" element={<div>Dental work by status</div>}></Route>
