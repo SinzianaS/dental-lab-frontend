@@ -3,15 +3,44 @@ import { Table, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import DentalWorkForm from "./DentalWorkForm";
 
 // Define a map of status enum values to display names
 const statusMap = {
-    "IN_PROGRESS": "In Progress",
-    "COMPLETED": "Completed"
-  };
+  IN_PROGRESS: "In Progress",
+  COMPLETED: "Completed",
+};
+
+const typeMap = {
+    METAL_CERAMIC:"metal ceramic",
+    VENEER:"veneer",
+    ZIRCONIA:"zirconia",
+    IMPLANT:"implant",
+}
+const colorMap= {
+  A1: "a1",
+  A2: "a2",
+  A3: "a3",
+  A35: "a3.5",
+  A4: "a4",
+  B1: "b1",
+  B2: "b2",
+  B3: "b3",
+  C1: "c1",
+  C2: "c2",
+  C3: "c3",
+  D2: "d2",
+  D3: "d3",
+  BL1: "bl1",
+  BL2: "bl2",
+  BL3: "bl3",
+  BL4: "bl4",
+}
 export default function DentalWorks() {
   const [state, setstate] = useState([]);
   const [loading, setloading] = useState(true);
+  const [showDentalWorkForm, setShowDentalWorkForm] = useState(false);
+
   useEffect(() => {
     getData();
   }, []);
@@ -25,9 +54,9 @@ export default function DentalWorks() {
             key: row.id,
             Id: row.id,
             Patient: row.patient ? row.patient.name : "",
-            Status:statusMap[row.status],
-            Type: row.type,
-            Color: row.color,
+            Status: statusMap[row.status],
+            Type: typeMap[row.type],
+            Color: colorMap[row.color],
           }))
         );
       }
@@ -54,11 +83,13 @@ export default function DentalWorks() {
       key: "4",
       title: "Type",
       dataIndex: "type",
+      render: (text) => typeMap[text],
     },
     {
       key: "5",
       title: "Color",
       dataIndex: "color",
+      render: (text) => colorMap[text],
     },
     {
       key: "6",
@@ -73,17 +104,19 @@ export default function DentalWorks() {
       },
     },
   ];
-  const onAddDentalWork = () => {
-    const randomNumber = parseInt(Math.random() * 1000);
-    const newDentalWork = {
-      id: randomNumber,
-      name: "name" + randomNumber,
-      age: randomNumber,
-    };
-    setstate((preState) => {
-      return [...preState, newDentalWork];
-    });
+  const handleCreateDentalWork = async (values) => {
+    try {
+      await Axios.post("http://localhost:8080/api/dental-works", values);
+      getData();
+      setShowDentalWorkForm(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
+  const onAddDentalWork = () => {
+    setShowDentalWorkForm(true);
+  };
+
   return (
     <div className="DentalWorks">
       {loading ? (
@@ -96,9 +129,16 @@ export default function DentalWorks() {
             pagination={{ pageSize: 20 }}
             scroll={{ y: 240 }}
           />
-          <div style={{display:"flex", justifyContent: 'center' }}>
-            <Button style ={{width: "150px"}} onClick={onAddDentalWork}>Add Dental Work</Button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button style={{ width: "150px" }} onClick={onAddDentalWork}>
+              Add Dental Work
+            </Button>
           </div>
+          <DentalWorkForm
+            visible={showDentalWorkForm}
+            onCancel={() => setShowDentalWorkForm(false)}
+            onCreate={handleCreateDentalWork}
+          />
         </div>
       )}
     </div>
