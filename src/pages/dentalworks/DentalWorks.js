@@ -49,16 +49,26 @@ export default function DentalWorks() {
     await Axios.get("http://localhost:8080/api/dental-works/all").then(
       (res) => {
         setloading(false);
-        setstate(
-          res.data.map((row) => ({
+        const mappedResponse = res.data.map((row) => ({
             key: row.id,
             Id: row.id,
             Patient: row.patient ? row.patient.name : "",
             Status: statusMap[row.status],
             Type: typeMap[row.type],
             Color: colorMap[row.color],
-          }))
-        );
+          }));
+
+        setstate(mappedResponse);
+        // setstate(
+        //   res.data.map((row) => ({
+        //     key: row.id,
+        //     Id: row.id,
+        //     Patient: row.patient ? row.patient.name : "",
+        //     Status: statusMap[row.status],
+        //     Type: typeMap[row.type],
+        //     Color: colorMap[row.color],
+        //   }))
+        // );
       }
     );
   };
@@ -71,25 +81,25 @@ export default function DentalWorks() {
     {
       key: "2",
       title: "Patient",
-      dataIndex: "patient",
+      dataIndex: "Patient",
     },
     {
       key: "3",
       title: "Status",
-      dataIndex: "status",
-      render: (text) => statusMap[text],
+      dataIndex: "Status",
+     // render: (text) => statusMap[text],
     },
     {
       key: "4",
       title: "Type",
-      dataIndex: "type",
-      render: (text) => typeMap[text],
+      dataIndex: "Type",
+      //render: (text) => typeMap[text],
     },
     {
       key: "5",
       title: "Color",
-      dataIndex: "color",
-      render: (text) => colorMap[text],
+      dataIndex: "Color",
+      //render: (text) => colorMap[text],
     },
     {
       key: "6",
