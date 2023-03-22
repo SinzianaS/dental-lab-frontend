@@ -44,7 +44,7 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
         >
           <Select>
             {patients.map((patient) => (
-              <Select.Option value={patient.name}>{patient.name}</Select.Option>
+              <Select.Option key={patient.id} value={patient.name}>{patient.name}</Select.Option>
             ))}
           </Select>
         </Form.Item>
@@ -64,10 +64,10 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
           rules={[{ required: true, message: "Please enter a type!" }]}
         >
           <Select>
-            <Select.Option value="Metal ceramic">Metal ceramic</Select.Option>
-            <Select.Option value="Veneer">Veneer</Select.Option>
-            <Select.Option value="Zirconia">Zirconia</Select.Option>
-            <Select.Option value="Implant">Implant</Select.Option>
+            <Select.Option value="metal ceramic">metal ceramic</Select.Option>
+            <Select.Option value="veneer">veneer</Select.Option>
+            <Select.Option value="zirconia">zirconia</Select.Option>
+            <Select.Option value="implant">implant</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item
@@ -85,7 +85,7 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
             <Select.Option value="B2">B2</Select.Option>
             <Select.Option value="B3">B3</Select.Option>
             <Select.Option value="C1">C1</Select.Option>
-            <Select.Optionion value="C2">C2</Select.Optionion>
+            <Select.Option value="C2">C2</Select.Option>
             <Select.Option value="C3">C3</Select.Option>
             <Select.Option value="D2">D2</Select.Option>
             <Select.Option value="D3">D3</Select.Option>
@@ -96,7 +96,9 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
           </Select>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading}>
+          <Button type="primary"
+          htmlType="submit"
+          >
             Add
           </Button>
         </Form.Item>
