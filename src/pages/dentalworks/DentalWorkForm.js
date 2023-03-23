@@ -2,7 +2,7 @@ import { Form, Select, Button, Modal } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function DentalWorkForm({ visible, onCancel, onCreate }) {
+export default function DentalWorkForm({ visible , onCancel, onCreate }) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [patients, setPatients] = useState([]);

@@ -47,6 +47,7 @@ export default function DentalWorks() {
   const [showDentalWorkForm, setShowDentalWorkForm] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+  const [dentalWorkFormValues, setDentalWorkFormValues] = useState({});
 
   useEffect(() => {
     getData();
@@ -69,6 +70,35 @@ export default function DentalWorks() {
       }
     );
   };
+
+  const handleDelete = async (id) => {
+    try {
+      await Axios.delete(`http://localhost:8080/api/dental-works/id/${id}`);
+      getData();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleEdit = async (record) => {
+    try {
+      const response = await Axios.get(`http://localhost:8080/api/dental-works/id/${record.id}`);
+      const dentalWorkToUpdate = response.data;
+  
+      setDentalWorkFormValues({
+        id: dentalWorkToUpdate.id,
+        patientId: dentalWorkToUpdate.patient ? dentalWorkToUpdate.patient.id : null,
+        status: dentalWorkToUpdate.status,
+        type: dentalWorkToUpdate.type,
+        color: dentalWorkToUpdate.color,
+        note: dentalWorkToUpdate.note,
+      });
+      setShowDentalWorkForm(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const columns = [
     {
       key: "Id",
@@ -112,8 +142,15 @@ export default function DentalWorks() {
       render: (record) => {
         return (
           <>
-            <EditOutlined />
-            <DeleteOutlined />
+            <Button icon={<EditOutlined />} onClick={() => handleEdit(record)}>
+              Edit
+            </Button>
+            <Button
+              icon={<DeleteOutlined />}
+              onClick={() => handleDelete(record)}
+            >
+              Delete
+            </Button>
           </>
         );
       },
@@ -138,7 +175,9 @@ export default function DentalWorks() {
     setSearchText(value.toLowerCase());
   };
 
-  const filteredData = state.filter((row) => row.patient.toLowerCase().includes(searchText));
+  const filteredData = state.filter((row) =>
+    row.patient.toLowerCase().includes(searchText)
+  );
 
   return (
     <div className="DentalWorks">
@@ -146,7 +185,13 @@ export default function DentalWorks() {
         "Loading"
       ) : (
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginBottom: 16,
+            }}
+          >
             <Search
               placeholder="Search by patient name"
               onChange={(e) => handleSearch(e.target.value)}
@@ -176,6 +221,7 @@ export default function DentalWorks() {
             visible={showDentalWorkForm}
             onCancel={() => setShowDentalWorkForm(false)}
             onCreate={handleCreateDentalWork}
+            setFormValues={setDentalWorkFormValues}
           />
         </div>
       )}
