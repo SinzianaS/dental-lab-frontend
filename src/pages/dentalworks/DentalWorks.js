@@ -1,9 +1,14 @@
 import "antd/dist/reset.css";
-import { Table, Button } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Table, Button, Input } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import DentalWorkForm from "./DentalWorkForm";
+const { Search } = Input;
 
 // Define a map of status enum values to display names
 const statusMap = {
@@ -12,12 +17,12 @@ const statusMap = {
 };
 
 const typeMap = {
-    METAL_CERAMIC:"metal ceramic",
-    VENEER:"veneer",
-    ZIRCONIA:"zirconia",
-    IMPLANT:"implant",
-}
-const colorMap= {
+  METAL_CERAMIC: "metal ceramic",
+  VENEER: "veneer",
+  ZIRCONIA: "zirconia",
+  IMPLANT: "implant",
+};
+const colorMap = {
   A1: "a1",
   A2: "a2",
   A3: "a3",
@@ -35,11 +40,13 @@ const colorMap= {
   BL2: "bl2",
   BL3: "bl3",
   BL4: "bl4",
-}
+};
 export default function DentalWorks() {
   const [state, setstate] = useState([]);
   const [loading, setloading] = useState(true);
   const [showDentalWorkForm, setShowDentalWorkForm] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
 
   useEffect(() => {
     getData();
@@ -50,25 +57,15 @@ export default function DentalWorks() {
       (res) => {
         setloading(false);
         const mappedResponse = res.data.map((row) => ({
-            key: row.id,
-            Id: row.id,
-            Patient: row.patient ? row.patient.name : "",
-            Status: statusMap[row.status],
-            Type: typeMap[row.type],
-            Color: colorMap[row.color],
-          }));
+          key: row.id,
+          id: row.id,
+          patient: row.patient ? row.patient.name : "",
+          status: statusMap[row.status],
+          type: typeMap[row.type],
+          color: colorMap[row.color],
+        }));
 
         setstate(mappedResponse);
-        // setstate(
-        //   res.data.map((row) => ({
-        //     key: row.id,
-        //     Id: row.id,
-        //     Patient: row.patient ? row.patient.name : "",
-        //     Status: statusMap[row.status],
-        //     Type: typeMap[row.type],
-        //     Color: colorMap[row.color],
-        //   }))
-        // );
       }
     );
   };
@@ -76,30 +73,38 @@ export default function DentalWorks() {
     {
       key: "Id",
       title: "ID",
-      dataIndex: "Id",
+      dataIndex: "id",
     },
     {
       key: "2",
       title: "Patient",
-      dataIndex: "Patient",
+      dataIndex: "patient",
+      sorter: (record1, record2) => {
+        return record1.patient > record2.patient;
+      },
     },
     {
       key: "3",
       title: "Status",
-      dataIndex: "Status",
-     // render: (text) => statusMap[text],
+      dataIndex: "status",
+      filters: Object.keys(statusMap).map((key) => ({
+        text: statusMap[key],
+        value: key,
+      })),
+      onFilter: (value, record) => record.status === value,
     },
     {
       key: "4",
       title: "Type",
-      dataIndex: "Type",
-      //render: (text) => typeMap[text],
+      dataIndex: "type",
     },
     {
       key: "5",
       title: "Color",
-      dataIndex: "Color",
-      //render: (text) => colorMap[text],
+      dataIndex: "color",
+      sorter: (record1, record2) => {
+        return record1.color > record2.color;
+      },
     },
     {
       key: "6",
@@ -127,16 +132,39 @@ export default function DentalWorks() {
     setShowDentalWorkForm(true);
   };
 
+  const { Search } = Input;
+  const [searchText, setSearchText] = useState("");
+  const handleSearch = (value) => {
+    setSearchText(value.toLowerCase());
+  };
+
+  const filteredData = state.filter((row) => row.patient.toLowerCase().includes(searchText));
+
   return (
     <div className="DentalWorks">
       {loading ? (
         "Loading"
       ) : (
         <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+            <Search
+              placeholder="Search by patient name"
+              onChange={(e) => handleSearch(e.target.value)}
+              style={{ width: 200 }}
+              prefix={<SearchOutlined />}
+            />
+          </div>
           <Table
             columns={columns}
-            dataSource={state}
-            pagination={{ pageSize: 20 }}
+            dataSource={filteredData}
+            pagination={{
+              current: page,
+              pageSize: pageSize,
+              onChange: (page, pageSize) => {
+                setPage(page);
+                setPageSize(pageSize);
+              },
+            }}
             scroll={{ y: 240 }}
           />
           <div style={{ display: "flex", justifyContent: "center" }}>

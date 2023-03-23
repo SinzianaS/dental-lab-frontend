@@ -39,7 +39,7 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item
           name="patient"
-          label="Patient"
+          label="patient"
           rules={[{ required: true, message: "Please select a patient!" }]}
         >
           <Select>
@@ -50,7 +50,7 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
         </Form.Item>
         <Form.Item
           name="status"
-          label="Status"
+          label="status"
           rules={[{ required: true, message: "Please select a status!" }]}
         >
           <Select>
@@ -60,7 +60,7 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
         </Form.Item>
         <Form.Item
           name="type"
-          label="Type"
+          label="type"
           rules={[{ required: true, message: "Please enter a type!" }]}
         >
           <Select>
@@ -72,7 +72,7 @@ export default function DentalWorkForm({ visible, onCancel, onCreate }) {
         </Form.Item>
         <Form.Item
           name="color"
-          label="Color"
+          label="color"
           rules={[{ required: true, message: "Please enter a color!" }]}
         >
           <Select placeholder="Select a color">

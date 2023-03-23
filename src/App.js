@@ -14,7 +14,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import DentalWorks from "./pages/dentalworks/DentalWorks";
 
 function App() {
-  const navigate = useNavigate();
   return (
     <div  style={{ display: "flex", flexDirection: "column", flex: 1, height:"100vh"}}>
       <Header />
@@ -55,11 +54,12 @@ function Footer() {
         color: "darkgrey",
         display: "flex",
         justifyContent: "center",
+        fontSize:"12px",
         alignItems: "center",
         fontWeight: "bold",
       }}
     >
-      Footer
+      Sinziana 2023
     </div>
   );
 }
@@ -89,7 +89,7 @@ function SideMenu() {
   );
 }
 function Home(){
-return <div> component</div>
+return <div>component</div>
 }
 
 function Content() {
