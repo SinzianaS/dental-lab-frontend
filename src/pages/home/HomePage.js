@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate, Link } from 'react-router-dom';
+import Authentication from '../authentication/Authentication';
 
-export default function Home(props) {
+export default function HomePage(props) {
   // Access isLoggedIn prop
   const { isLoggedIn, setIsLoggedIn } = props;
 
@@ -15,18 +16,25 @@ export default function Home(props) {
     <Route {...rest} render={(props) => (
       isLoggedIn === true
         ? <Component {...props} />
-        : <Redirect to='/login' />
+        : <Navigate to='/login' />
     )} />
   );
 
   return (
     <div>
-      <h1>Welcome to the Home Page!</h1>
-      <p>You are now logged in.</p>
-      {/* Add more content here */}
-
-      {/* Authenticated route */}
-      <PrivateRoute path="/dashboard" component={Dashboard} />
+      {isLoggedIn ? (
+        <div>
+          <h1>Welcome, user!</h1>
+          {/* Add more personalized content here */}
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+        </div>
+      ) : (
+        <div>
+          <h1>Welcome to the Home Page!</h1>
+          <p>Please login to access your dashboard.</p>
+          <Link to="/authentication"><Authentication /></Link>
+        </div>
+      )}
     </div>
   );
 }

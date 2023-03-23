@@ -4,26 +4,16 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import EditUserModal from "./EditUserModal";
 import DeleteUserModal from "./DeleteUserModal";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-export default function PatientsItem({ patient, patients, onPatientsChange }) {
-  const navigate = useNavigate();
-  const [dentist, setDentist] = useState(null);
-
-  useEffect(() => {
-    setDentist(patient?.dentist || null);
-  }, [patient]);
-
+export default function DentistsItem({ dentist, dentists, onDentistsChange }) {
   const tabs = [
     {
       label: <FontAwesomeIcon icon={faUser} />,
       key: 1,
       children: (
         <div>
-          <div>{patient.name}</div>
-          <div>Age:{patient.age}</div>
-          <div>Dentist:{dentist?.name}</div>
+          <div>{dentist && dentist.name}</div>
+          <div>Clinic:{dentist && dentist.clinicName}</div>
         </div>
       ),
     },
@@ -32,9 +22,7 @@ export default function PatientsItem({ patient, patients, onPatientsChange }) {
       key: 2,
       children: (
         <div>
-          <div>{dentist?.name}</div>
-          <div>{dentist?.clinicName}</div>
-          <div>{dentist?.address}</div>
+          <div>{dentist && dentist.address}</div>
         </div>
       ),
     },
@@ -48,13 +36,13 @@ export default function PatientsItem({ patient, patients, onPatientsChange }) {
           width: 500,
           marginBottom: "8px",
         }}
-        title={<h3>{patient.name}</h3>}
+        title={<h3>{dentist.name}</h3>}
       >
         <Tabs tabPosition="left" items={tabs} />
       </Card>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <EditUserModal patient={patient}></EditUserModal>
-        <DeleteUserModal patient={patient}></DeleteUserModal>
+        <EditUserModal dentist={dentist}></EditUserModal>
+        <DeleteUserModal dentist={dentist}></DeleteUserModal>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import { Button, Input, Modal } from "antd";
+import { Button, Modal } from "antd";
 import { useState } from "react";
 
-export default function EditUserModal({ patient }) {
+export default function EditUserModal({ dentist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -20,7 +20,7 @@ export default function EditUserModal({ patient }) {
         Edit
       </Button>
       <Modal
-        title={`Edit patient ${patient.name}`}
+        title={`Edit ${dentist.name}`}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}

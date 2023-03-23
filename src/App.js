@@ -12,12 +12,23 @@ import {
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import DentalWorks from "./pages/dentalworks/DentalWorks";
+import Patients from "./pages/patients/Patients";
+import Dentists from "./pages/dentists/Dentists";
+import Authentication from "./pages/authentication/Authentication";
+import HomePage from "./pages/home/HomePage"
 
 function App() {
   return (
-    <div  style={{ display: "flex", flexDirection: "column", flex: 1, height:"100vh"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        flex: 1,
+        height: "100vh",
+      }}
+    >
       <Header />
-      <div style={{ display: "flex", flexDirection: "row", flex: 1}}>
+      <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
         <SideMenu />
         <Content />
       </div>
@@ -54,7 +65,7 @@ function Footer() {
         color: "darkgrey",
         display: "flex",
         justifyContent: "center",
-        fontSize:"12px",
+        fontSize: "12px",
         alignItems: "center",
         fontWeight: "bold",
       }}
@@ -67,47 +78,91 @@ function Footer() {
 function SideMenu() {
   const navigate = useNavigate();
   return (
-      <Menu
-        onClick={({ key }) => navigate(key)}
-        defaultSelectedKeys={[window.location.pathname]}
-        items={[
-          { label: "Home", key: "/", icon: <HomeOutlined /> },
-          { label: "Dentists", key: "/dentists", icon: <IdcardOutlined />},
-          {label: "Technicians", key: "/dentaltechnicians", icon: <TeamOutlined />},
-          { label: "Patients", key: "/patients", icon: <SmileOutlined />},
-          {label: "Dental works", key: "/dentalworks", icon: <CrownOutlined />,
-          children:[
-            {label: "Show all", key: "/dentalworks/alldentalworks"},
-            {label: "Find by id", key: "/dentalworks/getdentalworkbyid"},
-            {label: "Find by color", key: "/dentalworks/getdentalworkbycolor"},
-            {label: "Find by status", key: "/dentalworks/getdentalworkbystatus"},
-            {label: "Find by type", key: "/dentalworks/getdentalworkbytype"}
-            ]},
-          { label: "Login", key: "/authentication", icon: <UserOutlined /> },
-        ]}
-      ></Menu>
+    <Menu
+      onClick={({ key }) => navigate(key)}
+      defaultSelectedKeys={[window.location.pathname]}
+      items={[
+        { label: "Home", key: "/", icon: <HomeOutlined /> },
+        { label: "Dentists", key: "/dentists", icon: <IdcardOutlined /> },
+        {
+          label: "Technicians",
+          key: "/dentaltechnicians",
+          icon: <TeamOutlined />,
+        },
+        { label: "Patients", key: "/patients", icon: <SmileOutlined /> },
+        {
+          label: "Dental works",
+          key: "/dentalworks",
+          icon: <CrownOutlined />,
+          children: [
+            { label: "Show all", key: "/dentalworks/alldentalworks" },
+            { label: "Find by id", key: "/dentalworks/getdentalworkbyid" },
+            {
+              label: "Find by color",
+              key: "/dentalworks/getdentalworkbycolor",
+            },
+            {
+              label: "Find by status",
+              key: "/dentalworks/getdentalworkbystatus",
+            },
+            { label: "Find by type", key: "/dentalworks/getdentalworkbytype" },
+          ],
+        },
+        { label: "Login", key: "/authentication", icon: <UserOutlined /> },
+      ]}
+    ></Menu>
   );
 }
-function Home(){
-return <div>component</div>
+
+function Home() {
+  return <div>component</div>;
 }
 
 function Content() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/dentists" element={<div>Dentists</div>}></Route>
-        <Route path="/dentaltechnicians" element={<div>Dental technicians</div>}></Route>
-        <Route path="/patients" element={<div>Patients</div>}></Route>
+        <Route path="/" element={<div>Home Page</div>}></Route>
+        <Route path="/dentists" element={<Dentists />}></Route>
+        <Route
+          path="/dentaltechnicians"
+          element={<div>Dental technicians</div>}
+        ></Route>
+        <Route path="/patients" element={<Patients />}></Route>
 
         <Route path="/dentalworks/alldentalworks" element={<DentalWorks />} />
-        <Route path="/getdentalworkbyid" element={<div>Dental work by id</div>}></Route>
-        <Route path="/getdentalworkbycolor" element={<div>Dental work by color</div>}></Route>
-        <Route path="/getdentalworkbystatus" element={<div>Dental work by status</div>}></Route>
-        <Route path="/getdentalworkbytype" element={<div>Dental work by type</div>}></Route>
+        <Route
+          path="/getdentalworkbyid"
+          element={<div>Dental work by id</div>}
+        ></Route>
+        <Route
+          path="/getdentalworkbycolor"
+          element={<div>Dental work by color</div>}
+        ></Route>
+        <Route
+          path="/getdentalworkbystatus"
+          element={<div>Dental work by status</div>}
+        ></Route>
+        <Route
+          path="/getdentalworkbytype"
+          element={<div>Dental work by type</div>}
+        ></Route>
 
-        <Route path="/authentication" element={<div>Login</div>}></Route>
+        <Route
+          path="/authentication"
+          element={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "50vh",
+              }}
+            >
+              <Authentication />
+            </div>
+          }
+        ></Route>
       </Routes>
     </div>
   );

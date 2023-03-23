@@ -1,4 +1,4 @@
-import { Button, Input, Modal } from "antd";
+import { Button, Modal } from "antd";
 import { useState } from "react";
 
 export default function DeleteUserModal({ patient }) {
@@ -22,7 +22,7 @@ export default function DeleteUserModal({ patient }) {
         style={{ marginRight: "4px" }}
         onClick={showModal}
       >
-        Delete user
+        Delete
       </Button>
       <Modal
         title={`Delete patient ${patient.name}?`}

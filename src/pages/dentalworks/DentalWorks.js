@@ -82,12 +82,16 @@ export default function DentalWorks() {
 
   const handleEdit = async (record) => {
     try {
-      const response = await Axios.get(`http://localhost:8080/api/dental-works/id/${record.id}`);
+      const response = await Axios.get(
+        `http://localhost:8080/api/dental-works/id/${record.id}`
+      );
       const dentalWorkToUpdate = response.data;
-  
+
       setDentalWorkFormValues({
         id: dentalWorkToUpdate.id,
-        patientId: dentalWorkToUpdate.patient ? dentalWorkToUpdate.patient.id : null,
+        patientId: dentalWorkToUpdate.patient
+          ? dentalWorkToUpdate.patient.id
+          : null,
         status: dentalWorkToUpdate.status,
         type: dentalWorkToUpdate.type,
         color: dentalWorkToUpdate.color,
