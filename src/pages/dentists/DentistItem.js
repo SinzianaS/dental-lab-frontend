@@ -5,7 +5,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import EditUserModal from "./EditUserModal";
 import DeleteUserModal from "./DeleteUserModal";
 
-export default function DentistsItem({ dentist, dentists, onDentistsChange }) {
+export default function DentistItem({ dentist, dentists, onDentistsChange }) {
   const tabs = [
     {
       label: <FontAwesomeIcon icon={faUser} />,

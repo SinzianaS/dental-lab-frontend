@@ -4,11 +4,10 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import EditUserModal from "./EditUserModal";
 import DeleteUserModal from "./DeleteUserModal";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function PatientsItem({ patient, patients, onPatientsChange }) {
-  const navigate = useNavigate();
+
   const [dentist, setDentist] = useState(null);
 
   useEffect(() => {

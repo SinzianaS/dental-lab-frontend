@@ -37,8 +37,8 @@ export default function Dentists() {
       {dentists.map((dentist) => (
         <DentistItem
           key={dentist.id}
-          patient={dentist}
-          patients={dentists}
+          dentist={dentist}
+          dentists={dentists}
           onDentistsChange={onDentistsChange}
         />
       ))}
