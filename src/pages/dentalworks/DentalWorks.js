@@ -147,7 +147,7 @@ export default function DentalWorks() {
             </Button>
             <Button
               icon={<DeleteOutlined />}
-              onClick={() => handleDelete(record)}
+              onClick={() => handleDelete(record.id)}
             >
               Delete
             </Button>
