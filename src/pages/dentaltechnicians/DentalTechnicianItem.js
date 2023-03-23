@@ -1,28 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, Tabs } from "antd";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import EditUserModal from "./EditUserModal";
 import DeleteUserModal from "./DeleteUserModal";
 
-export default function DentistItem({ dentist}) {
+export default function DentalTechnicianItem({ dentalTechnician }) {
   const tabs = [
     {
       label: <FontAwesomeIcon icon={faUser} />,
       key: 1,
       children: (
         <div>
-          <div>{dentist && dentist.name}</div>
-          <div>Clinic:{dentist && dentist.clinicName}</div>
-        </div>
-      ),
-    },
-    {
-      label: <FontAwesomeIcon icon={faLocationDot} />,
-      key: 2,
-      children: (
-        <div>
-          <div>{dentist && dentist.address}</div>
+          <div>{dentalTechnician.name}</div>
         </div>
       ),
     },
@@ -36,13 +25,13 @@ export default function DentistItem({ dentist}) {
           width: 500,
           marginBottom: "8px",
         }}
-        title={<h3>{dentist.name}</h3>}
+        title={<h3>{dentalTechnician.name}</h3>}
       >
         <Tabs tabPosition="left" items={tabs} />
       </Card>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <EditUserModal dentist={dentist}></EditUserModal>
-        <DeleteUserModal dentist={dentist}></DeleteUserModal>
+        <EditUserModal dentalTechnician={dentalTechnician}></EditUserModal>
+        <DeleteUserModal dentalTechnician={dentalTechnician}></DeleteUserModal>
       </div>
     </div>
   );

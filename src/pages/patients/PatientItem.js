@@ -6,7 +6,7 @@ import EditUserModal from "./EditUserModal";
 import DeleteUserModal from "./DeleteUserModal";
 import { useEffect, useState } from "react";
 
-export default function PatientsItem({ patient, patients, onPatientsChange }) {
+export default function PatientsItem({ patient }) {
 
   const [dentist, setDentist] = useState(null);
 

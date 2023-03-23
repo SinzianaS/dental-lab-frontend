@@ -123,7 +123,7 @@ export default function DentalWorks() {
       dataIndex: "status",
       filters: Object.keys(statusMap).map((key) => ({
         text: statusMap[key],
-        value: key,
+        value: statusMap[key],
       })),
       onFilter: (value, record) => record.status === value,
     },
@@ -146,15 +146,14 @@ export default function DentalWorks() {
       render: (record) => {
         return (
           <>
-            <Button icon={<EditOutlined />} onClick={() => handleEdit(record)}>
-              Edit
-            </Button>
+            <Button
+              icon={<EditOutlined />}
+              onClick={() => handleEdit(record)}
+            ></Button>
             <Button
               icon={<DeleteOutlined />}
               onClick={() => handleDelete(record.id)}
-            >
-              Delete
-            </Button>
+            ></Button>
           </>
         );
       },
@@ -225,7 +224,7 @@ export default function DentalWorks() {
             visible={showDentalWorkForm}
             onCancel={() => setShowDentalWorkForm(false)}
             onCreate={handleCreateDentalWork}
-            setFormValues={setDentalWorkFormValues}
+            setFormValues={dentalWorkFormValues}
           />
         </div>
       )}

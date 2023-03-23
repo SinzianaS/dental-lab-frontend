@@ -15,6 +15,7 @@ import DentalWorks from "./pages/dentalworks/DentalWorks";
 import Patients from "./pages/patients/Patients";
 import Dentists from "./pages/dentists/Dentists";
 import Authentication from "./pages/authentication/Authentication";
+import DentalTechnicians from "./pages/dentaltechnicians/DentalTechnicians";
 import HomePage from "./pages/home/HomePage"
 
 function App() {
@@ -44,6 +45,7 @@ function Header() {
       style={{
         height: 60,
         backgroundColor: "lightskyblue",
+        fontSize:"30px",
         color: "white",
         display: "flex",
         justifyContent: "center",
@@ -51,7 +53,7 @@ function Header() {
         fontWeight: "bold",
       }}
     >
-      Header
+      Dentis
     </div>
   );
 }
@@ -65,7 +67,7 @@ function Footer() {
         color: "darkgrey",
         display: "flex",
         justifyContent: "center",
-        fontSize: "12px",
+        fontSize: "13px",
         alignItems: "center",
         fontWeight: "bold",
       }}
@@ -126,7 +128,7 @@ function Content() {
         <Route path="/dentists" element={<Dentists />}></Route>
         <Route
           path="/dentaltechnicians"
-          element={<div>Dental technicians</div>}
+          element={<DentalTechnicians/>}
         ></Route>
         <Route path="/patients" element={<Patients />}></Route>
 

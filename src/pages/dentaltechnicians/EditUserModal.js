@@ -1,7 +1,7 @@
-import { Button, Input, Modal } from "antd";
+import { Button, Modal } from "antd";
 import { useState } from "react";
 
-export default function EditUserModal({ patient }) {
+export default function EditUserModal({ dentalTechnician }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -17,16 +17,14 @@ export default function EditUserModal({ patient }) {
   return (
     <div>
       <Button type="primary" style={{ marginRight: "4px" }} onClick={showModal}>
-        Edit patient
+        Edit
       </Button>
       <Modal
-        title={`Edit patient ${patient.name}`}
+        title={`Edit ${dentalTechnician.name}`}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-      >
-
-      </Modal>
+      ></Modal>
     </div>
   );
 }

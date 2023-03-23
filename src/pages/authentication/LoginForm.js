@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import LoginButton from './LoginButton';
 import axios from 'axios';
 
@@ -10,8 +10,10 @@ export default function LoginForm(props) {
       console.log('Login response:', response.data);
       localStorage.setItem('accessToken', response.data.accessToken);
       props.setIsLoggedIn(true);
+      message.success('Logged in successfully');
     } catch (error) {
       console.error('Login error:', error);
+      message.error('Failed to log in');
     }
   };
   return (
